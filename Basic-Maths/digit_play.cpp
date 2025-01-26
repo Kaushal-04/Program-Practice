@@ -19,4 +19,6 @@ int main(){
     cout << "Digits are : " ;
     printDigit(num); 
     return 0;
+
+    // Time Complexity : O(log10(num))
 }
