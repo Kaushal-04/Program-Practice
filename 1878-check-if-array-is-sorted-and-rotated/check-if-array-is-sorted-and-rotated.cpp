@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+        int flag = 0, n = nums.size();
+        for(auto i=1; i<n; i++){
+            if(nums[i-1] > nums[i])
+                flag++;
+        }
+        if(nums[n-1] > nums[0])
+            flag++;
+        if(flag <= 1)
+            return true;
+        return false;
+    }
+};
