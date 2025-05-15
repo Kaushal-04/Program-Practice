@@ -1,36 +1,32 @@
-#include <climits>
-#include <string>
-using namespace std;
-
 class Solution {
 public:
     int myAtoi(string s) {
-        long long num = 0;
-        int i = 0;
-        bool pos = true;
-
-        // Skip leading spaces
-        while (i < s.length() && s[i] == ' ') {
+        if(s.length()==0)
+            return 0;
+        int i=0;
+        while(i<s.size() && s[i]==' '){
             i++;
         }
-
-        // Check for sign
-        if (i < s.length() && (s[i] == '-' || s[i] == '+')) {
-            pos = (s[i] == '+');
+        s=s.substr(i);
+        int sign=1;
+        long ans=0;
+        if(s[0]=='-')
+            sign=-1;
+        i=(s[0]=='+'||s[0]=='-')?1:0;
+        // if(s[0]=='+' || s[0]=='-')
+        //     i=1;
+        // else
+        //     i=0;
+        while(i<s.length()){
+            if(s[i]==' ' || !isdigit(s[i]))
+                break;
+            ans=ans*10+s[i]-'0';
+            if(sign==-1 && -1*ans< INT_MIN)
+                return INT_MIN;
+            if(sign==1 && ans>INT_MAX)
+                return INT_MAX;
             i++;
         }
-
-        // Process digits
-        while (i < s.length() && s[i] >= '0' && s[i] <= '9') {
-            num = num * 10 + (s[i] - '0');
-
-            // Check for overflow
-            if (num > INT_MAX) {
-                return pos ? INT_MAX : INT_MIN;
-            }
-            i++;
-        }
-
-        return pos ? num : -num;
+        return (int)(sign*ans);
     }
 };
