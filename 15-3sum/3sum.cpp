@@ -1,29 +1,30 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> ans;
         sort(nums.begin(), nums.end());
-        int n = nums.size();
-        for (int i = 0; i < n - 2; ++i) {
-            if (i > 0 && nums[i] == nums[i - 1]) continue;  // Skip duplicates for i
-            int j = i + 1;
-            int k = n - 1;
-            while (j < k) {
-                int sum = nums[i] + nums[j] + nums[k];
-                if (sum == 0) {
-                    ans.push_back({nums[i], nums[j], nums[k]});
-                    ++j;
-                    --k;
-                    // Skip duplicates for j and k
-                    while (j < k && nums[j] == nums[j - 1]) ++j;
-                    while (j < k && nums[k] == nums[k + 1]) --k;
-                } else if (sum < 0) {
-                    ++j;
-                } else {
-                    --k;
+        vector<vector<int>> res;
+
+        for (int i = 0; i < nums.size(); i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue; // Skip duplicates for i
+            int l = i + 1, r = nums.size() - 1;
+            int target = -nums[i];
+            while (l < r) {
+                int sum = nums[l] + nums[r];
+                if (sum == target) {
+                    res.push_back({nums[i], nums[l], nums[r]});
+                    l++;
+                    r--;
+                    // Skip duplicates for left pointer
+                    while (l < r && nums[l] == nums[l - 1]) l++;
+                    // Skip duplicates for right pointer
+                    while (l < r && nums[r] == nums[r + 1]) r--;
                 }
+                else if (sum > target)
+                    r--;
+                else
+                    l++;
             }
         }
-        return ans;
+        return res;
     }
 };
