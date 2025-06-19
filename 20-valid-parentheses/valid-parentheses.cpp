@@ -4,33 +4,29 @@ public:
         if(s[0] == ')' || s[0] == '}' || s[0] == ']')
             return false;
         stack<char> st;
-        for(auto i=0; i<s.length(); i++){
-            if(s[i] == '(' || s[i] == '{' || s[i] == '[')
+        st.push(s[0]);
+        for(auto i=1; i<s.length(); i++){
+            if(s[i] == '(' || s[i] == '{' || s[i] == '['){
                 st.push(s[i]);
-            else{
-                if(s[i] == ')'){
-                    if(!st.empty() && st.top() == '(')
-                        st.pop();
-                    else
-                        return false;
-                }
-                else if(s[i] == '}'){
-                        if(!st.empty() && st.top() == '{')
-                            st.pop();
-                        else
-                            return false;
-                }
-                else if(s[i] == ']'){
-                    if(!st.empty() && st.top() == '[')
-                        st.pop();
-                    else
-                        return false;
-                }
             }
-
+            else{
+                if(s[i] == ')' && !st.empty() && st.top() == '('){
+                    st.pop();
+                    continue;
+                }
+                if(s[i] == '}' && !st.empty() && st.top() == '{'){
+                    st.pop();
+                    continue;
+                }
+                if(s[i] == ']' && !st.empty() && st.top() == '['){
+                    st.pop();
+                    continue;
+                }
+                return false;
+            }
         }
-        if(st.empty())
-            return true;
-        return false;
+        if(!st.empty())
+            return false;
+        return true;
     }
 };
