@@ -3,7 +3,6 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         sort(nums.begin(), nums.end());
         vector<vector<int>> res;
-
         for (int i = 0; i < nums.size(); i++) {
             if (i > 0 && nums[i] == nums[i - 1]) continue; // Skip duplicates for i
             int l = i + 1, r = nums.size() - 1;
@@ -14,15 +13,12 @@ public:
                     res.push_back({nums[i], nums[l], nums[r]});
                     l++;
                     r--;
-                    // Skip duplicates for left pointer
+                    // Skip duplicates 
                     while (l < r && nums[l] == nums[l - 1]) l++;
-                    // Skip duplicates for right pointer
                     while (l < r && nums[r] == nums[r + 1]) r--;
                 }
-                else if (sum > target)
-                    r--;
-                else
-                    l++;
+                else if (sum > target)  r--;
+                else    l++;
             }
         }
         return res;
