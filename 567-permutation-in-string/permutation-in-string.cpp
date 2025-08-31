@@ -1,23 +1,23 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        if (s1.length() > s2.length()) return false;
-
-        vector<int> s1Freq(26, 0), windFreq(26, 0);
-        int len = s1.length();
-
-        for (int i = 0; i < len; i++) {
-            s1Freq[s1[i] - 'a']++;
-            windFreq[s2[i] - 'a']++;
+        int n = s1.length();
+        int m = s2.length();
+        
+        if (n > m) return false;  
+        vector<int> freq1(26, 0), freq2(26, 0);
+        for(int i = 0; i < n; i++) {
+            freq1[s1[i] - 'a']++;
+            freq2[s2[i] - 'a']++;
         }
 
-        if (s1Freq == windFreq) return true;
-
-        for (int i = len; i < s2.length(); i++) {
-            windFreq[s2[i] - 'a']++;               
-            windFreq[s2[i - len] - 'a']--;         
-
-            if (s1Freq == windFreq) return true;  
+        if (freq1 == freq2) return true;  
+        int l = 0;
+        for (int r = n; r < m; r++) {
+            freq2[s2[r] - 'a']++;     
+            freq2[s2[l] - 'a']--;  
+            l++;                          
+            if (freq1 == freq2) return true; 
         }
 
         return false;
