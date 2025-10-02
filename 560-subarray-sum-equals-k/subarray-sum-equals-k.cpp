@@ -1,14 +1,19 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        unordered_map<int, int> mp;
-        mp[0]++;
+        unordered_map<int, int> prefixCount;
+        prefixCount[0] = 1;  // base case: sum from 0 to i equals k
+
         int sum = 0, count = 0;
-        for(auto i=0; i<nums.size(); i++){
-            sum += nums[i];
-            count+= mp[sum-k];
-            mp[sum]++;
+
+        for (int num : nums) {
+            sum += num;
+            if (prefixCount.find(sum - k) != prefixCount.end()) {
+                count += prefixCount[sum - k];
+            }
+            prefixCount[sum]++;
         }
+
         return count;
     }
 };
