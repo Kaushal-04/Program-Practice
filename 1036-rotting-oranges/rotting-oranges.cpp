@@ -1,49 +1,50 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
-        int rows = grid.size();
-        int cols = grid[0].size();
-        queue<pair<int, int>> q;
-        int fresh = 0;
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                if (grid[i][j] == 2) {
-                    q.push({i, j});
-                } else if (grid[i][j] == 1) {
-                    ++fresh;
+        queue<pair<pair<int, int> , int>> q;
+        int count = 0;
+        for(int i=0; i<grid.size(); i++){
+            for(int j=0; j<grid[0].size(); j++){
+                if(grid[i][j] == 2){
+                    q.push({{i, j}, count});
                 }
             }
         }
-
-        if (fresh == 0) return 0; 
-        int time = 0;
-        vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
-        // Step 2: BFS to rot adjacent oranges
-        while (!q.empty()) {
-            int size = q.size();
-            bool rottedThisMinute = false;
-
-            for (int i = 0; i < size; ++i) {
-                auto [x, y] = q.front();
-                q.pop();
-
-                for (auto [dx, dy] : directions) {
-                    int nx = x + dx;
-                    int ny = y + dy;
-
-                    if (nx >= 0 && ny >= 0 && nx < rows && ny < cols && grid[nx][ny] == 1) {
-                        grid[nx][ny] = 2;
-                        q.push({nx, ny});
-                        fresh--;
-                        rottedThisMinute = true;
-                    }
+        while(!q.empty()){
+            auto fr = q.front();
+            q.pop();
+            int i = (fr.first).first, j = (fr.first).second;
+            int cnt = fr.second;
+            if(i > 0)
+                if(grid[i-1][j] == 1){
+                    grid[i-1][j] = 2;
+                    q.push({{i-1, j}, cnt+1});
+                }
+            if(i < grid.size()-1)
+                if(grid[i+1][j] == 1){
+                    grid[i+1][j] = 2;
+                    q.push({{i+1, j}, cnt+1});
+                }
+            if(j > 0)
+                if(grid[i][j-1] == 1){
+                    grid[i][j-1] = 2;
+                    q.push({{i, j-1}, cnt+1});
+                }
+            if(j < grid[0].size()-1)
+                if(grid[i][j+1] == 1){
+                    grid[i][j+1] = 2;
+                    q.push({{i, j+1}, cnt+1});
+                }
+            
+            count = max(count, cnt);
+        }
+        for(int i=0; i<grid.size(); i++){
+            for(int j=0; j<grid[0].size(); j++){
+                if(grid[i][j] == 1){
+                    return -1;
                 }
             }
-
-            if (rottedThisMinute) ++time;
         }
-
-        return fresh == 0 ? time : -1;
+        return count;
     }
 };
