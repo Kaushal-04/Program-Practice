@@ -1,19 +1,20 @@
+// Use Bottom up DP Approach
 class Solution {
 public:
-    int help(vector<int>& nums, int curr, int prev, vector<vector<int>>& dp){
-        if(curr == nums.size()) return 0;
-        if(prev != -1 && dp[curr][prev] != -1)
-            return dp[curr][prev];
-        int take = 0;
-        if(prev == -1 || nums[curr] > nums[prev])
-            take = 1 + help(nums, curr + 1, curr, dp);
-        int nottake = 0 + help(nums, curr + 1, prev, dp);
-        if(prev != -1)
-            dp[curr][prev] = max(take, nottake);
-        return max(take, nottake);
-    }
     int lengthOfLIS(vector<int>& nums) {
-        vector<vector<int>> dp(2501, vector<int>(2501, -1));
-        return help(nums, 0, -1, dp);
+        int n = nums.size();
+        int maxi = 1;
+        vector<int> dp(n, 1);
+        for(int i=1; i<n; i++){
+            int j = 0; 
+            while(j < i){
+                if(nums[j] < nums[i]){
+                    dp[i] = max(dp[i], dp[j] + 1);
+                    maxi = max(maxi, dp[i]);
+                }
+                j++;
+            }
+        }
+        return maxi;
     }
 };
