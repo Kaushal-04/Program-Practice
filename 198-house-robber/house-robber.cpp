@@ -1,18 +1,18 @@
 class Solution {
 public:
-    int help(vector<int>& nums, int maxi, int i, vector<int>& dp){
-        if(i >= nums.size())    return 0;
-        if(dp[i] != -1) return dp[i];
-        maxi += nums[i];
-        int pic = nums[i] + help(nums, maxi, i+2, dp);
-        maxi -= nums[i];
-        int nonpic = help(nums, maxi, i+1, dp);
-        dp[i] = max(pic, nonpic);
-        return dp[i];
+    int help(vector<int>& nums, int ind, vector<int>& dp){
+        if(ind > nums.size() - 1)
+            return 0;
+        if(dp[ind] != -1)
+            return dp[ind];
+        int rob = nums[ind] + help(nums, ind+2, dp);
+        int notrob = 0 + help(nums, ind+1, dp);
+        dp[ind] = max(rob, notrob);
+        return dp[ind];
     }
     int rob(vector<int>& nums) {
         int n = nums.size();
         vector<int> dp(n, -1);
-        return help(nums, 0, 0, dp);
+        return help(nums, 0, dp);
     }
 };
