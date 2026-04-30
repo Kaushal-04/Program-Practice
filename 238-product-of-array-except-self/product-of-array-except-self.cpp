@@ -2,22 +2,16 @@ class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
         int n = nums.size();
-        vector<int> pre(n, 1), suff(n, 1), ans(n ,1);
-
-        //Prefix array calucate karo
-        for(auto i=1; i<n; i++){
-            pre[i] = pre[i-1] * nums[i-1];
-        }
-
-        //Suffix array calculate karo
-        for(auto i = n-2; i >=0; i--){
-            suff[i] = suff[i+1] * nums[i+1];
-        }
-
-        //Create final array
+        vector<int> pref(n+1, 1);
+        vector<int> post(n+1, 1);
         for(auto i=0; i<n; i++){
-            ans[i] = pre[i] * suff[i];
+            pref[i+1] = nums[i] * pref[i];
+            post[n-i-1] = post[n-i] * nums[n-i-1];
         }
-        return ans;
+        vector<int> res(n);
+        for(auto i=0; i<n; i++){
+            res[i] = pref[i] * post[i+1];
+        }
+        return res;
     }
 };

@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+select subTable.customer_id , count(*) as count_no_trans from (select customer_id  from Visits Left Join Transactions on Visits.Visit_id = Transactions.visit_id where Transactions.transaction_id is NULL) as subTable group by subTable.customer_id  ;
