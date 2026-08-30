@@ -1,3 +1,4 @@
+//n/3 -> maximum 2 candidates posiible and also verify for each candidate at end before addin to res
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
         ArrayList<Integer> res = new ArrayList<>();
