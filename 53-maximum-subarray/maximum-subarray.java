@@ -1,3 +1,4 @@
+/* Only add element if by adding that element , the sum is greater than that element else start a new sum from that element*/
 class Solution {
     public int maxSubArray(int[] nums) {
         int n = nums.length;
