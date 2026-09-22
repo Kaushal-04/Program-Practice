@@ -1,3 +1,5 @@
+//Add characted to result that are matched in all words
+
 class Solution {
     public String longestCommonPrefix(String[] strs) {
         StringBuilder sb = new StringBuilder("");
