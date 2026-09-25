@@ -1,3 +1,5 @@
+// Drey to use deque to store valid indexes and remove index outside the window and also remove smaller no. index that number never be greater
+
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
