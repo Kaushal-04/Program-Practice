@@ -1,3 +1,6 @@
+//Approach: Use Floyd's Tortoise and Hare Algorithm wwhile(fast != null && fast.next != null) update slow with 1 step and fast by 2 step.
+
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
