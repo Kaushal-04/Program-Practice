@@ -1,3 +1,5 @@
+//Approach : Use three pointer prev, curr and next and iterate over curr != null
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
