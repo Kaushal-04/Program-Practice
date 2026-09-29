@@ -1,3 +1,5 @@
+//Approach : calucate the target and check in HashMap weather target is preset or not.
+
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         int n = nums.length;
