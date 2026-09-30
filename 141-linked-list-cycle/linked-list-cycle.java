@@ -1,3 +1,5 @@
+//Approach: Use slow and fast pointer
+
 /**
  * Definition for singly-linked list.
  * class ListNode {
