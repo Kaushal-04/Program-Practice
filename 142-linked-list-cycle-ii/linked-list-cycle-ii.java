@@ -1,3 +1,5 @@
+//Approach : First detect cycle using slow and fast then again iterate slow and fast one by one to find starting cycle point
+
 public class Solution {
     public ListNode detectCycle(ListNode head) {
         ListNode slow = head;
