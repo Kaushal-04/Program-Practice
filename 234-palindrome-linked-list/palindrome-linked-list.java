@@ -1,3 +1,5 @@
+//Approach: Reverse linked list and match with original or half reverse and match with half LL
+
 class Solution {
     public boolean isPalindrome(ListNode head) {
 
