@@ -1,3 +1,5 @@
+//Approach : first copy the original ll without random and HashMap the original and correponsing new node then again iterate and fill random node.
+
 /*
 // Definition for a Node.
 class Node {
