@@ -1,4 +1,4 @@
-//Approach : Use decreasing stack , if we pop() ten at te same time that new number is next greater for peek() number so store it else store -1
+//Approach : Use decreasing stack , if we pop() then at the same time that new number is next greater for peek() number so store it else store -1
 
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
