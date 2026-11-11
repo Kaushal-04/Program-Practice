@@ -1,21 +1,15 @@
-//Approach : calucate the target and check in HashMap weather target is preset or not.
-
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        int n = nums.length;
-        if(n <= 2)
-            return new int[] {1,0};
+        int[] res = new int[2];
         HashMap<Integer, Integer> mp = new HashMap<>();
-        int[] res= new int[2];
-        for(int i=0; i<n; i++){
-            int req = target - nums[i];
-            if(mp.get(req) != null){
-                res[1] = i;
-                res[0] = mp.get(req);
+        for(int i=0; i<nums.length; i++){
+            int t = target - nums[i];
+            if(mp.containsKey(t)){
+                res[0] = i;
+                res[1] = mp.get(t);
                 return res;
-            }else{
-                mp.put(nums[i], i);
             }
+            mp.put(nums[i], i);
         }
         return res;
     }
