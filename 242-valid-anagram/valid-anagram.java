@@ -4,13 +4,15 @@ class Solution {
         int m = t.length();
         if(n != m)
             return false;
-        int[] freq = new int[26];
+        HashMap<Character, Integer> mp = new HashMap<>();
         for(int i=0; i<n; i++){
-            freq[s.charAt(i) - 'a']++;
-            freq[t.charAt(i) - 'a']--;
+            char stemp = s.charAt(i);
+            char ttemp = t.charAt(i);
+            mp.put(stemp, mp.getOrDefault(stemp, 0) + 1);
+            mp.put(ttemp, mp.getOrDefault(ttemp, 0) - 1);
         }
-        for(int i=0; i<26; i++){
-            if(freq[i] != 0)
+        for(Map.Entry<Character, Integer> e : mp.entrySet()){
+            if(e.getValue() != 0)
                 return false;
         }
         return true;
